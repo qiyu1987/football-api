@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Team = require('../team/model')
 const Player = db.define(
     'player',
     {
@@ -11,6 +12,8 @@ const Player = db.define(
             type: Sequelize.INTEGER,
             field:'player_number'
         }   
-    }
+    },
+    {timestamps: false}
     )
+Player.belongsTo(Team)
 module.exports = Player

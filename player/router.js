@@ -1,5 +1,6 @@
 const {Router} = require('express')
 const Player = require('./model')
+const Team = require('../team/model')
 const router = new Router()
 router.get('/player',
     (req, res, next) => {
@@ -22,7 +23,7 @@ router.post('/player',
 )
 router.get('/player/:id',
     (req, res, next) => {
-        Player.findByPk(req.params.id)
+        Player.findByPk(req.params.id, {include: [Team]})
             .then( player => {
                 if (!player) {
                     res.status(404).end()
