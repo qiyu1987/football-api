@@ -16,4 +16,5 @@ const Player = db.define(
     {timestamps: false}
     )
 Player.belongsTo(Team)
+Team.hasMany(Player)
 module.exports = Player

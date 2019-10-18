@@ -2,7 +2,7 @@ const {Router} = require('express')
 const Player = require('./model')
 const Team = require('../team/model')
 const router = new Router()
-router.get('/player',
+router.get('/players',
     (req, res, next) => {
         Player.findAll()
             .then( players => {
@@ -11,7 +11,7 @@ router.get('/player',
             .catch(next)
     }
 )
-router.post('/player',
+router.post('/players',
     (req, res, next) => {
         if (!req.body) {
             res.status(404).end()
@@ -21,7 +21,7 @@ router.post('/player',
             .catch(next) 
     }
 )
-router.get('/player/:id',
+router.get('/players/:id',
     (req, res, next) => {
         Player.findByPk(req.params.id, {include: [Team]})
             .then( player => {
@@ -32,5 +32,42 @@ router.get('/player/:id',
             })
             .catch(next)
     })
-
+router.delete('/players/:id',
+    (req, res, next) => {
+        Player.findByPk(req.params.id)
+        .then( player => {
+            if (!player) {
+                res.status(404).end()
+            }
+        })
+    Player.destroy({
+        where: {
+            id: req.params.id,
+        }
+        })
+        .then(() => {
+            res.status(204).end();
+        })
+        .catch(next);
+    }
+)
+router.put('/players/:id',
+    (req, res, next) => {
+        Player.findOne({
+            where: {
+              id: req.params.id,
+            }
+          })
+            .then(player => {
+              if (player) {
+                player
+                  .update(req.body)
+                  .then(player => res.json(player));
+              } else {
+                res.status(404).end();
+              }
+            })
+            .catch(next);
+    }
+)
 module.exports = router
