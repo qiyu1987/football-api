@@ -1,16 +1,23 @@
+// import Router class from express
 const {Router} = require('express')
+// import model
 const Team = require('./model')
 const Player = require('../player/model')
+// instanciate router
 const router = new Router()
+// register a get /teams route
 router.get('/teams',
     (req, res, next) => {
+        // find all teams
         Team.findAll()
             .then( teams => {
+                // send result in response body
                 res.send(teams)
             })
             .catch(next)
     }
 )
+// add a post /teams endpoint
 router.post('/teams',
     (req, res, next) => {
         if (!req.body) {
@@ -67,5 +74,5 @@ router.put('/teams/:id',
         .catch(next)
     }
 )
-
+// export router to use in index.js
 module.exports = router

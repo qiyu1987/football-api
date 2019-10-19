@@ -12,7 +12,7 @@ function toData(token) {
 
 module.exports = { toJWT, toData }
 
-const token = toJWT({userid:9001})
-console.log(token)
-const data = toData(token)
-console.log(data)
+// const token = toJWT({userid:9001})
+// console.log(token)
+// const data = toData(token)
+// console.log(data)
