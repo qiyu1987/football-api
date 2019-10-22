@@ -41,7 +41,7 @@ router.get('/teams/:id',
             })
             .catch(next)
 })
-router.delete('/teams/:id',
+router.delete('/teams/:id', auth,
     (req, res, next) => {
         Team.findByPk(req.params.id)
             .then( team => {
