@@ -60,7 +60,7 @@ router.delete('/teams/:id', auth,
             .catch(next);
     }
 )
-router.put('/teams/:id',
+router.put('/teams/:id', auth,
     (req, res, next) => {
         Team.findByPk(req.params.id)
         .then( team => {
