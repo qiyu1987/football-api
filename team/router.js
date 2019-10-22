@@ -3,6 +3,8 @@ const {Router} = require('express')
 // import model
 const Team = require('./model')
 const Player = require('../player/model')
+//import auth middleware
+const auth = require('../server/auth/middleware')
 // instanciate router
 const router = new Router()
 // register a get /teams route
@@ -18,7 +20,7 @@ router.get('/teams',
     }
 )
 // add a post /teams endpoint
-router.post('/teams',
+router.post('/teams', auth, 
     (req, res, next) => {
         if (!req.body) {
             res.status(404).end()

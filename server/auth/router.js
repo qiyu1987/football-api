@@ -29,7 +29,8 @@ router.post('/login', (req, res, next) => {
       if (!entity) {
         console.log('not found')
         res.status(400).send({
-          message: 'User with that email does not exist'
+          message: 'Not Valid email or password'
+          // message: 'User with that email does not exist'
         })
       }
   
@@ -43,7 +44,8 @@ router.post('/login', (req, res, next) => {
       }
       else {
         res.status(400).send({
-          message: 'Password was incorrect'
+          message:'Invalid Email or Password'
+          // message: 'Password was incorrect'
         })
       }
     })
@@ -53,40 +55,13 @@ router.post('/login', (req, res, next) => {
         message: 'Something went wrong'
       })
     })
-    // 2. use bcrypt.compareSync to check the password against the stored hash
-    // 3. if the password is correct, return a JWT with the userId of the user (user.id)
-
-    // res.send({
-    //   jwt: toJWT({ userId: 1 })
-    // })
   }
 })
 
-
+// define endpoints here
 router.get('/secret-endpoint', auth,(req, res) => {
   res.send({
     message: `Thanks for visiting the secret endpoint ${req.user.email}.`,
   })
-  //   const auth = req.headers.authorization && req.headers.authorization.split(' ')
-  //   if (auth && auth[0] === 'Bearer' && auth[1]) {
-  //     try {
-  //       const data = toData(auth[1])
-  //       res.send({
-  //         message: 'Thanks for visiting the secret endpoint.',
-  //         data
-  //       })
-  //     }
-  //     catch(error) {
-  //       res.status(400).send({
-  //         message: `Error ${error.name}: ${error.message}`,
-  //       })
-  //     }
-  //   }
-  //   else {
-  //     res.status(401).send({
-  //       message: 'Please supply some valid credentials'
-  //     })
-  //   }
-  })
-// define endpoints here
+})
 module.exports = router
