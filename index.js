@@ -22,7 +22,7 @@ const middleware = cors()
 // call db sync method,
 // use {force: true} argument to reset database when start API
 // easier to test during development
-db.sync({force: true})
+db.sync()
     .then(() => {
         // console.log confirmation database is connected
         console.log('database schema updated')
