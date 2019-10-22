@@ -54,8 +54,8 @@ router.delete('/teams/:id',
                 id: req.params.id,
             }
             })
-            .then((id) => {
-                res.send({id}).status(401).end()
+            .then((number) => {
+                res.send({id:Number(req.params.id)}).status(401).end()
             })
             .catch(next);
     }
